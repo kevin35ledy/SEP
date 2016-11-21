@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,6 +34,7 @@ public class MaFenetre extends JFrame implements ActionListener{
 
 	private void init() {
 		jp_top=new JPanel(new FlowLayout());
+		jp_top.setBorder(BorderFactory.createTitledBorder("Top"));
 		init_algo();
 		init_time();
 	}

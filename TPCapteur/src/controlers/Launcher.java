@@ -9,8 +9,6 @@ public class Launcher {
 		MaFenetre f =new MaFenetre("Captor Asynchronous");
 		f.setVisible(true);
 		
-		
-		
 	}
 
 }
