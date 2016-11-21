@@ -1,10 +1,12 @@
 package controlers;
 
+import views.MaFenetre;
+
 public class Launcher {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub	
-		
+		MaFenetre f =new MaFenetre("Captor Asynchronous");
+		f.setVisible(true);
 	}
 
 }
