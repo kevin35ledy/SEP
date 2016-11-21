@@ -1,6 +1,8 @@
 package models;
 
+import java.util.concurrent.Future;
+
 public interface Observer<T> {
 
-	public void update(T s);
+	public Future<?> update(T s);
 }
