@@ -1,17 +1,6 @@
 package models;
 
-public class AlgoDiffusionSequentielle implements AlgoDiffusion{
+public class AlgoDiffusionSequentielle extends AlgoDiffusion{
 
-	@Override
-	public void configure() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

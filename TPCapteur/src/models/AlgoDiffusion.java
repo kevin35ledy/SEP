@@ -1,8 +1,41 @@
 package models;
 
-public interface AlgoDiffusion {
+import java.util.List;
+
+public abstract class AlgoDiffusion {
 	
-	public void configure();
-	public void execute();
+	protected List<Canal> listCanal;
+	protected Capteur capteur;
+	
+	protected AlgoDiffusion() {
+	}
+	
+	public void configure(Capteur cpt,List<Canal> list) {
+		setCapteur(cpt);
+		setListCanal(list);
+	}
+	
+	public void execute() {
+		for(Canal c:listCanal)
+		{
+			c.update(capteur);
+		}
+	}
+
+	public List<Canal> getListCanal() {
+		return listCanal;
+	}
+
+	public void setListCanal(List<Canal> listCanal) {
+		this.listCanal = listCanal;
+	}
+
+	public Capteur getCapteur() {
+		return capteur;
+	}
+
+	public void setCapteur(Capteur capteur) {
+		this.capteur = capteur;
+	}
 
 }

@@ -1,23 +1,28 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class Canal implements Capteur, ObserverDeCapteur {
+public class Canal extends Capteur implements ObserverDeCapteur {
 
 	private ScheduledExecutorService sch=null;
-	private List<Observer> list;
+	private Capteur capteur;
+	private Afficheur afficheur;
 	
-	public Canal(){
+	public Canal(int id){
+		super(id);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
 	}
 	
+	public Canal(int id,AlgoDiffusion algo){
+		super(id,algo);
+		this.list = new ArrayList<>();
+		this.sch=new ScheduledThreadPoolExecutor(20);
+	}
 	//creation method invocation
 	public void createUpdate(){
 		
@@ -31,32 +36,19 @@ public class Canal implements Capteur, ObserverDeCapteur {
 	public void schedule(GetValue g, int val, TimeUnit timeType){
 		
 	}
-	
-	
+
 	@Override
-	public void attach(Observer o) {
-		this.list.add(o);
+	public void update(Capteur subject) {
+		//creer objet Update-> callable(capteur)
+		//scheduler(callable,time)
+		//TODO
 	}
 
 	@Override
-	public void detach(Observer o) {
-		this.list.remove(o);
-	}
-
-	@Override
-	public Future<?> getValue(Future<?> c) {
-		
-		return c;
-	}
-
-	@Override
-	public void tick() {
-
-	}
-
-	@Override
-	public Future update(Capteur subject) {
+	public Future<?> updateFuture(Capteur subject) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
 }
