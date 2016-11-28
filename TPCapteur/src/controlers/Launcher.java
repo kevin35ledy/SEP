@@ -2,6 +2,8 @@ package controlers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import models.Afficheur;
 import models.AlgoDiffusion;
@@ -13,6 +15,7 @@ import views.MaFenetre;
 
 public class Launcher {
 
+	public static final ExecutorService executer = Executors.newSingleThreadExecutor();
 	
 	public static void main(String[] args) {
 		MaFenetre f =new MaFenetre("Captor Asynchronous");
@@ -39,6 +42,8 @@ public class Launcher {
 		List<Canal> l = new ArrayList();
 		l.add(cn1);
 		algo.configure(c1, l);
+		
+		
 		
 		c1.tick();
 		
