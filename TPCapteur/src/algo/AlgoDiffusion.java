@@ -1,6 +1,9 @@
-package models;
+package algo;
 
 import java.util.List;
+
+import models.Canal;
+import models.Capteur;
 
 public abstract class AlgoDiffusion {
 	

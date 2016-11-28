@@ -1,11 +1,10 @@
-package models;
+package algo;
 
 public class AlgoDiffusionEpoque extends AlgoDiffusion {
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("[info] algo epoque");
 	}
 
 }

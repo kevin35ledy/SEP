@@ -20,7 +20,7 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 		this.sch=new ScheduledThreadPoolExecutor(20);
 	}
 	
-	public Canal(int id,AlgoDiffusion algo){
+	public Canal(int id,String algo){
 		super(id,algo);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
@@ -43,8 +43,7 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	public void update(Capteur subject) {
 		//creer objet Update-> callable(capteur)
 		//scheduler(callable,time)
-		
-		//TODO
+		System.out.println(this+"==>updated");
 	}
 
 	@Override

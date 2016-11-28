@@ -1,14 +1,19 @@
 package models;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
+import algo.AlgoDiffusion;
+import algo.AlgoDiffusionAtomique;
+import algo.AlgoDiffusionEpoque;
+import algo.AlgoDiffusionSequentielle;
 
-public abstract class Capteur implements Subject{
-	// canal
+public abstract class Capteur implements Subject {
+
+	protected AlgoDiffusion algo;
 	protected List<Canal> list;
 	protected int val;
-	protected AlgoDiffusion algo;
 	protected int idCapteur;
 
 	public int getIdCapteur() {
@@ -23,25 +28,37 @@ public abstract class Capteur implements Subject{
 		this.idCapteur = id;
 		this.list = new ArrayList<>();
 		val = 0;
-		algo = new AlgoDiffusionAtomique();// TODO
+		this.algo = new AlgoDiffusionAtomique();
+		this.algo.configure(this, list);
 	}
 
-	public Capteur(int id, AlgoDiffusion algo) {
+	public Capteur(int id, String algo) {
 		this.idCapteur = id;
 		this.list = new ArrayList<>();
 		val = 0;
-		this.algo = algo;
+		if(algo.equals("Atomique"))
+		{
+			this.algo=new AlgoDiffusionAtomique();
+		}
+		if(algo.equals("Seq"))
+		{
+			this.algo=new AlgoDiffusionSequentielle();
+		}
+		if(algo.equals("Epoque"))
+		{
+			this.algo=new AlgoDiffusionEpoque();
+		}
+		this.algo.configure(this, list);
 	}
 
 	@Override
 	public void attach(Observer<?> o) {
-// TODO instanceof canal
-		this.list.add((Canal)o);
+		this.list.add((Canal) o);
 	}
 
 	@Override
-	public void detach(Observer<?>  o) {
-		this.list.remove((Canal)o);
+	public void detach(Observer<?> o) {
+		this.list.remove((Canal) o);
 	}
 
 	public Future<?> getValue(Future<?> c) {
@@ -51,8 +68,7 @@ public abstract class Capteur implements Subject{
 	public void tick() {
 		this.val++;
 		// algo execute
-		this.algo.execute();
+		algo.execute();
 		// updates
-		
 	}
 }
