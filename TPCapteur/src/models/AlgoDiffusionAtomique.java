@@ -7,4 +7,12 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 		
 	}
 
+	@Override
+	public void execute() {
+		for(Canal c:listCanal)
+		{
+			c.update(capteur);
+		}		
+	}
+
 }

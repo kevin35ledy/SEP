@@ -6,6 +6,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import controlers.Launcher;
+
 public class Canal extends Capteur implements ObserverDeCapteur {
 
 	private ScheduledExecutorService sch=null;
@@ -47,8 +49,13 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 
 	@Override
 	public Future<?> updateFuture(Capteur subject) {
-		// TODO Auto-generated method stub
-		return null;
+		//creer objet Update-> callable(capteur)
+		//scheduler(callable,time)
+		Update methodInvoc = new Update<>(this.capteur, this);
+		//submit returns a Future Object
+		Future f = Launcher.executer.submit(methodInvoc);
+		//TODO
+		return f;
 	}
 
 	

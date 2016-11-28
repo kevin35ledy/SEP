@@ -15,12 +15,8 @@ public abstract class AlgoDiffusion {
 		setListCanal(list);
 	}
 	
-	public void execute() {
-		for(Canal c:listCanal)
-		{
-			c.update(capteur);
-		}
-	}
+	public abstract void execute();
+	
 
 	public List<Canal> getListCanal() {
 		return listCanal;
