@@ -1,13 +1,15 @@
 # SEP
 
+![](img/screen1.png)
+
 ## todo
-- [ ] Subject(I)
-- [ ] Capteur(I)
-- [ ] Observer<T> (I)
+- [X] Subject(I)
+- [X] Observer<T> (I)
 - [ ] ObserverdeCapteur(I)
-- [ ] AlgoDiffusion(I)
+- [X] AlgoDiffusion(I)
 - [ ] DiffusionAtomique
 - [ ] DiffusionSeq
+- [X] Capteur(I)
 - [ ] CapteurImpl
 - [ ] Canal
 - [ ] Afficheur
