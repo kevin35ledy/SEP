@@ -2,18 +2,18 @@ package algo;
 
 import java.util.List;
 
-import models.Canal;
 import models.Capteur;
+import models.Observer;
 
 public abstract class AlgoDiffusion {
 	
-	protected List<Canal> listCanal;
+	protected List<Observer> listCanal;
 	protected Capteur capteur;
 	
 	protected AlgoDiffusion() {
 	}
 	
-	public void configure(Capteur cpt,List<Canal> list) {
+	public void configure(Capteur cpt,List<Observer> list) {
 		setCapteur(cpt);
 		setListCanal(list);
 	}
@@ -21,11 +21,11 @@ public abstract class AlgoDiffusion {
 	public abstract void execute();
 	
 
-	public List<Canal> getListCanal() {
+	public List<Observer> getListCanal() {
 		return listCanal;
 	}
 
-	public void setListCanal(List<Canal> listCanal) {
+	public void setListCanal(List<Observer> listCanal) {
 		this.listCanal = listCanal;
 	}
 

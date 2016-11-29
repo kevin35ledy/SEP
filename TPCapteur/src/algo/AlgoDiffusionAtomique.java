@@ -1,6 +1,7 @@
 package algo;
 
 import models.Canal;
+import models.Observer;
 
 public class AlgoDiffusionAtomique extends AlgoDiffusion{
 	
@@ -12,9 +13,9 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 	@Override
 	public void execute() {
 		System.out.println("[info-exe"+listCanal.size()+"] algo atomique");
-		for(Canal c:listCanal)
+		for(Observer<?> c:listCanal)
 		{
-			c.update(capteur);
+			((Canal)(c)).updateFuture(capteur);
 		}		
 	}
 

@@ -2,20 +2,19 @@ package models;
 
 import java.util.concurrent.Callable;
 
-@SuppressWarnings("hiding")
-public class Update<ObserverDeCapteur> implements Callable<ObserverDeCapteur>{
+public class Update implements Callable<Object>{
 
-	private Capteur capteur;
-	private ObserverDeCapteur afficheur; //afficheur
+	private Canal canal;
+	private Afficheur afficheur; //afficheur
 	
-	public Update(Capteur capteur, ObserverDeCapteur aff){
-		this.capteur = capteur;
+	public Update(Canal canal, Afficheur aff){
+		this.canal = canal;
 		this.afficheur = aff;
 	}
 	
 	@Override
-	public ObserverDeCapteur call() throws Exception {
-		((Afficheur)(this.afficheur)).update(this.capteur);
+	public Object call() throws Exception {
+		this.afficheur.updateFuture(this.canal);
 		return null;
 	}
 

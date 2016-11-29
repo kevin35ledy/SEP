@@ -12,7 +12,7 @@ import algo.AlgoDiffusionSequentielle;
 public abstract class Capteur implements Subject {
 
 	protected AlgoDiffusion algo;
-	protected List<Canal> list;
+	protected List<Observer> list;
 	protected int val;
 	protected int idCapteur;
 
@@ -51,18 +51,25 @@ public abstract class Capteur implements Subject {
 		this.algo.configure(this, list);
 	}
 
-	@Override
-	public void attach(Observer<?> o) {
-		this.list.add((Canal) o);
-	}
+	
+	public abstract void attach(Observer<?> o);
 
 	@Override
 	public void detach(Observer<?> o) {
 		this.list.remove((Canal) o);
 	}
 
-	public Future<?> getValue(Future<?> c) {
-		return c;
+	public int getValue() {
+		
+		/*
+		 * depend de l'algo 
+		 * atomique : 1 rédacteur XOR n ecrivains : pour n canaux on doit appeler n fois capteur.getValue avant de refaire val ++
+		 * seq : on transmet la valeur copiée à l'instant ou le tick() etait effectué... pendant la diffusion, on peut continuer de ticker
+		 * epoque : 
+		 */
+		
+		System.out.println("Capteur.getValue " + this.val);
+		return this.val; // diffusion atomique
 	}
 
 	public void tick() {

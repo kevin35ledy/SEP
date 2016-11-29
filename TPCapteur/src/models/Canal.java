@@ -10,7 +10,7 @@ import controlers.Launcher;
 
 public class Canal extends Capteur implements ObserverDeCapteur {
 
-	private ScheduledExecutorService sch=null;
+	private ScheduledExecutorService sch;
 	private Capteur capteur;
 	private Afficheur afficheur;
 	
@@ -27,15 +27,19 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	}
 	//creation method invocation
 	public void createUpdate(){
+		//GetValue getValueCallable = new GetValue(this.capteur, this);
+		
 		
 	}
-	public void createGetValue(){
-		//TODO
-		//GetValue g = new GetValue();
-		//schedule
+	public Future<Integer> createGetValue(){
+		// getValue of capteur -> retourne un futur
+		System.out.println("creation GetValue "+this);
+		GetValue getValueCallable = new GetValue(this.capteur, this);
+		//Future res = this.capteur.getValue(callableGetValue);
+		return sch.schedule(getValueCallable, 840, TimeUnit.MILLISECONDS); //renvoie un future
 	}
 	
-	public void schedule(GetValue g, int val, TimeUnit timeType){
+	public void schedule(GetValue getValueCallable, int val, TimeUnit timeType){
 		
 	}
 
@@ -47,15 +51,24 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	}
 
 	@Override
-	public Future<?> updateFuture(Capteur subject) {
-		//creer objet Update-> callable(capteur)
-		//scheduler(callable,time)
-		Update methodInvoc = new Update<>(this.capteur, this);
+	public Future<?> updateFuture(Capteur capteur) {
+		
+		System.out.println("creation Update :" +this);
+		Update methodInvoc = new Update(this, this.afficheur);
 		//submit returns a Future Object
-		Future f = Launcher.executer.submit(methodInvoc);
-		//TODO
-		return f;
+		return sch.schedule(methodInvoc, 840, TimeUnit.MILLISECONDS); //renvoie un future
+		
 	}
+
+	@Override
+	public void attach(Observer<?> o) {
+		 
+		this.afficheur = (Afficheur)o;
+			
+		
+	}
+
+	
 
 	
 }
