@@ -27,14 +27,20 @@ public class MaFenetre extends JFrame implements ActionListener {
 	boolean started=false;
 
 	private JPanel jp_top;
+	private JPanel jp_canal;
+	private JPanel jp_afficheur;
+
 	private JPanel jp_centre;
 	
-	private static List<JLabel> listAfficheur;
+	private static List<JLabel> listCanals;
+	private static List<JLabel> listAfficheurs;
 	
 	private JLabel lb_algo;
+	
 	private JComboBox<String> cb_algo;
 	private JLabel lb_tick;
-	private JLabel lb_tickTime;
+	private JLabel lb_capteur;
+	
 	private JButton bp_start;
 	private JButton bp_stop;
 
@@ -44,6 +50,7 @@ public class MaFenetre extends JFrame implements ActionListener {
 		init();
 		placement();
 		this.getContentPane().setLayout(new BorderLayout());
+		// todo avec grilayout
 		this.getContentPane().add(jp_top, BorderLayout.NORTH);
 		this.getContentPane().add(jp_centre, BorderLayout.CENTER);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -62,42 +69,60 @@ public class MaFenetre extends JFrame implements ActionListener {
 	private void init() {
 		jp_top = new JPanel(new FlowLayout());
 		jp_top.setBorder(BorderFactory.createTitledBorder("Top"));
-		jp_centre = new JPanel(new GridLayout(2, 2));
-		jp_centre.setBorder(BorderFactory.createTitledBorder("Afficheur"));
 		init_algo();
-		init_timePanel();
+		init_top();
+		
+		jp_canal = new JPanel(new GridLayout(2, 2));
+		jp_canal.setBorder(BorderFactory.createTitledBorder("Canal"));
+		init_canal();
+		
+		jp_afficheur = new JPanel(new GridLayout(2, 2));
+		jp_afficheur.setBorder(BorderFactory.createTitledBorder("Afficheur"));
 		init_afficheur();
+		
+		jp_centre= new JPanel(new GridLayout(2,1));
+		jp_centre.add(jp_canal);
+		jp_centre.add(jp_afficheur);
+
+	}
+
+	private void init_canal() {
+		this.listCanals=new ArrayList<>();
+		listCanals.add(new JLabel("Canals 1"));
+		listCanals.add(new JLabel("Canals 2"));
+		listCanals.add(new JLabel("Canals 3"));
+		listCanals.add(new JLabel("Canals 4"));
+
+		for(int i=0;i<listCanals.size();i++)
+		{
+			jp_canal.add(listCanals.get(i));
+		}
 	}
 
 	private void init_afficheur() {
-		listAfficheur= new ArrayList<>();
+		listAfficheurs= new ArrayList<>();
 		
-		listAfficheur.add(new JLabel("Afficheur 1"));
-		listAfficheur.add(new JLabel("Afficheur 2"));
-		listAfficheur.add(new JLabel("Afficheur 3"));
-		listAfficheur.add(new JLabel("Afficheur 4"));
+		listAfficheurs.add(new JLabel("Afficheur 1"));
+		listAfficheurs.add(new JLabel("Afficheur 2"));
+		listAfficheurs.add(new JLabel("Afficheur 3"));
+		listAfficheurs.add(new JLabel("Afficheur 4"));
 
-		for(int i=0;i<listAfficheur.size();i++)
+		for(int i=0;i<listAfficheurs.size();i++)
 		{
-			jp_centre.add(listAfficheur.get(i));
+			jp_afficheur.add(listAfficheurs.get(i));
 		}
-		
-//		jp_centre.add(new JLabel("Afficheur 1"));
-//		jp_centre.add(new JLabel("Afficheur 2"));
-//		jp_centre.add(new JLabel("Afficheur 3"));
-//		jp_centre.add(new JLabel("Afficheur 4"));
 	}
 
-	private void init_timePanel() {
+	private void init_top() {
 		lb_tick = new JLabel("Time : ");
-		lb_tickTime = new JLabel("120ms");
+		lb_capteur = new JLabel("capteur time");
 		bp_start = new JButton("Start");
 		bp_stop = new JButton("Stop");
 		bp_stop.setEnabled(false);
 		bp_start.addActionListener(this);
 		bp_stop.addActionListener(this);
 		jp_top.add(lb_tick);
-		jp_top.add(lb_tickTime);
+		jp_top.add(lb_capteur);
 		jp_top.add(bp_start);
 		jp_top.add(bp_stop);
 	}
@@ -166,6 +191,11 @@ public class MaFenetre extends JFrame implements ActionListener {
 
 	public static void setAfficheurValue(int id,String text)
 	{
-		listAfficheur.get(id).setText(text);
+		listAfficheurs.get(id).setText(text);
+	}
+	
+	public static void setCanalValue(int id,String text)
+	{
+		listCanals.get(id).setText(text);
 	}
 }
