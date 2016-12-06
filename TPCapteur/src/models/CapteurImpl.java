@@ -12,10 +12,12 @@ public class CapteurImpl extends Capteur {
 //		this.algo.configure(this, list);
 	}
 
+	// o est un canal.
 	@Override
 	public void attach(Observer<?> o) {
 		// TODO Auto-generated method stub
 		this.list.add(o);
+		((Canal)o).setCapteur(this);
 	}
 
 }

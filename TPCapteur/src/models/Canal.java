@@ -6,30 +6,31 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import controlers.Launcher;
-
 public class Canal extends Capteur implements ObserverDeCapteur {
 
 	private ScheduledExecutorService sch;
 	private Capteur capteur;
 	private Afficheur afficheur;
+	private int id;
 	
-	public Canal(int id){
-		super(id);
+	/**
+	 * Canal
+	 * @param idCapteur
+	 */
+	public Canal(int idCapteur){
+		super(idCapteur);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
 	}
 	
-	public Canal(int id,String algo){
-		super(id,algo);
+	public Canal(int idCapteur,String algo){
+		super(idCapteur,algo);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
 	}
 	//creation method invocation
 	public void createUpdate(){
-		//GetValue getValueCallable = new GetValue(this.capteur, this);
-		
-		
+//		GetValue getValueCallable = new GetValue(this.capteur, this);
 	}
 	public Future<Integer> createGetValue(){
 		// getValue of capteur -> retourne un futur
@@ -62,13 +63,10 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 
 	@Override
 	public void attach(Observer<?> o) {
-		 
 		this.afficheur = (Afficheur)o;
-			
-		
+	}
+	public void setCapteur(Capteur capteur){
+		this.capteur=capteur;
 	}
 
-	
-
-	
 }
