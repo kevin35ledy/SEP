@@ -8,6 +8,7 @@ import algo.AlgoDiffusion;
 import algo.AlgoDiffusionAtomique;
 import algo.AlgoDiffusionEpoque;
 import algo.AlgoDiffusionSequentielle;
+import views.MaFenetre;
 
 public abstract class Capteur implements Subject {
 
@@ -80,23 +81,16 @@ public abstract class Capteur implements Subject {
 	public int getRealValue(){
 		return this.val;
 	}
-	
-	public void incRealValue(){
-		boolean incrementer = true;
-		
-		for(Observer o : this.list){
-			if(o instanceof Canal){
-				incrementer = incrementer && ((Canal) o).isAfficheurUpdated();
-			}
-		}
-		if(incrementer){
-			this.val++;
-		}
-	}
 
 	public void tick() {
 		// algo execute
 		algo.execute();
 		// updates
+	}
+
+	// increment cpt
+	public void inc() {
+		this.val++;
+		MaFenetre.setCapteurValue(this.val);
 	}
 }

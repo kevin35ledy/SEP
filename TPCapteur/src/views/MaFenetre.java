@@ -39,7 +39,7 @@ public class MaFenetre extends JFrame implements ActionListener {
 	
 	private JComboBox<String> cb_algo;
 	private JLabel lb_tick;
-	private JLabel lb_capteur;
+	private static JLabel lb_capteur;
 	
 	private JButton bp_start;
 	private JButton bp_stop;
@@ -197,5 +197,10 @@ public class MaFenetre extends JFrame implements ActionListener {
 	public static void setCanalValue(int id,String text)
 	{
 		listCanals.get(id).setText(text);
+	}
+	
+	public static void setCapteurValue(int val)
+	{
+		lb_capteur.setText(String.valueOf(val));
 	}
 }

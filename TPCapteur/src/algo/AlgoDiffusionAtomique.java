@@ -12,7 +12,7 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 
 	@Override
 	public void execute() {
-		this.capteur.incRealValue();
+		incRealValue();
 		this.capteur.setValDiffused(this.capteur.getRealValue());
 		
 		System.out.println("[info-exe"+listCanal.size()+"] algo atomique");
@@ -21,5 +21,16 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 			((Canal)(c)).updateFuture(capteur);
 		}		
 	}
-
+	
+	public void incRealValue(){
+		boolean incrementer = true;
+		for(Observer o : listCanal){
+			if(o instanceof Canal){
+				incrementer = incrementer && ((Canal) o).isAfficheurUpdated();
+			}
+		}
+		if(incrementer){
+			this.capteur.inc();
+		}
+	}
 }
