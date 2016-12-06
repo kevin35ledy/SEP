@@ -30,6 +30,7 @@ public class Afficheur implements ObserverDeCapteur {
 		Future<Integer> f = ((Canal)canal).createGetValue();
 		try {
 			this.val = f.get().intValue();
+			this.canal.setAfficheurUpdated(true);
 			MaFenetre.setAfficheurValue(this.canal.getIdCapteur(),String.valueOf(this.val));
 			System.out.println("Afficheur"+this.canal.getIdCapteur()+" : "+ this.val);
 		} catch (NumberFormatException | InterruptedException | ExecutionException e) {

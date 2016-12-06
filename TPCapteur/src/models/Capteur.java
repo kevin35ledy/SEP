@@ -13,7 +13,8 @@ public abstract class Capteur implements Subject {
 
 	protected AlgoDiffusion algo;
 	protected List<Observer> list;
-	protected int val;
+	protected int val; //vraie valeur du capteur
+	protected int valDiffused = 0; //diffused value of captor
 	protected int idCapteur;
 
 	public int getIdCapteur() {
@@ -68,12 +69,32 @@ public abstract class Capteur implements Subject {
 		 * epoque : 
 		 */
 		
-		System.out.println("Capteur.getValue " + this.val);
-		return this.val; // diffusion atomique
+		System.out.println("Capteur.getValue " + this.valDiffused);
+		return this.valDiffused; // diffusion atomique
+	}
+	
+	public void setValDiffused(int v){
+		this.valDiffused = v;
+	}
+	
+	public int getRealValue(){
+		return this.val;
+	}
+	
+	public void incRealValue(){
+		boolean incrementer = true;
+		
+		for(Observer o : this.list){
+			if(o instanceof Canal){
+				incrementer = incrementer && ((Canal) o).isAfficheurUpdated();
+			}
+		}
+		if(incrementer){
+			this.val++;
+		}
 	}
 
 	public void tick() {
-		this.val++;
 		// algo execute
 		algo.execute();
 		// updates

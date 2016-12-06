@@ -12,6 +12,9 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 
 	@Override
 	public void execute() {
+		this.capteur.incRealValue();
+		this.capteur.setValDiffused(this.capteur.getRealValue());
+		
 		System.out.println("[info-exe"+listCanal.size()+"] algo atomique");
 		for(Observer<?> c:listCanal)
 		{

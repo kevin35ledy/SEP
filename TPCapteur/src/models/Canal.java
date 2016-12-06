@@ -12,6 +12,7 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	private Capteur capteur;
 	private Afficheur afficheur;
 	private int id;
+	boolean afficheurUpdated;
 	
 	/**
 	 * Canal
@@ -21,12 +22,14 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 		super(idCapteur);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
+		this.afficheurUpdated = true;
 	}
 	
 	public Canal(int idCapteur,String algo){
 		super(idCapteur,algo);
 		this.list = new ArrayList<>();
 		this.sch=new ScheduledThreadPoolExecutor(20);
+		this.afficheurUpdated = true;
 	}
 	//creation method invocation
 	public void createUpdate(){
@@ -55,6 +58,7 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	public Future<?> updateFuture(Capteur capteur) {
 		
 		System.out.println("creation Update :" +this);
+		this.afficheurUpdated = false;
 		Update methodInvoc = new Update(this, this.afficheur);
 		//submit returns a Future Object
 		return sch.schedule(methodInvoc, 840, TimeUnit.MILLISECONDS); //renvoie un future
@@ -67,6 +71,14 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	}
 	public void setCapteur(Capteur capteur){
 		this.capteur=capteur;
+	}
+	
+	public boolean isAfficheurUpdated(){
+		return this.afficheurUpdated;
+	}
+	
+	public void setAfficheurUpdated(boolean b){
+		this.afficheurUpdated = b;
 	}
 
 }
