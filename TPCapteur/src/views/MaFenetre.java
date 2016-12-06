@@ -169,7 +169,7 @@ public class MaFenetre extends JFrame implements ActionListener {
 						while(started)
 						{
 							try {
-								Thread.sleep(1000);
+								Thread.sleep(500);
 								capteur1.tick();
 							} catch (InterruptedException e) {
 								e.printStackTrace();

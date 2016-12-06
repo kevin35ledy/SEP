@@ -62,16 +62,8 @@ public abstract class Capteur implements Subject {
 	}
 
 	public int getValue() {
-		
-		/*
-		 * depend de l'algo 
-		 * atomique : 1 rédacteur XOR n ecrivains : pour n canaux on doit appeler n fois capteur.getValue avant de refaire val ++
-		 * seq : on transmet la valeur copiée à l'instant ou le tick() etait effectué... pendant la diffusion, on peut continuer de ticker
-		 * epoque : 
-		 */
-		
 		System.out.println("Capteur.getValue " + this.valDiffused);
-		return this.valDiffused; // diffusion atomique
+		return this.valDiffused; // diffusion
 	}
 	
 	public void setValDiffused(int v){
