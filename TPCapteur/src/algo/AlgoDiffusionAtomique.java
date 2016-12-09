@@ -3,6 +3,10 @@ package algo;
 import models.Canal;
 import models.Observer;
 
+/**
+ * @author qfdk
+ * AlgoDiffusionAtomique
+ */
 public class AlgoDiffusionAtomique extends AlgoDiffusion{
 	
 	public AlgoDiffusionAtomique()

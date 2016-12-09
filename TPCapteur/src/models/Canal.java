@@ -44,10 +44,6 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 		return sch.schedule(getValueCallable, new Random().nextInt(this.time), TimeUnit.MILLISECONDS); 
 	}
 	
-	public void schedule(GetValue getValueCallable, int val, TimeUnit timeType){
-		
-	}
-
 	@Override
 	public void update(Capteur subject) {
 		//creer objet Update-> callable(capteur)

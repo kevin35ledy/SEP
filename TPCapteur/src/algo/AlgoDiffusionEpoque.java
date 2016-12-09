@@ -3,6 +3,10 @@ package algo;
 import models.Canal;
 import models.Observer;
 
+/**
+ * @author qfdk
+ * AlgoDiffusionEpoque
+ */
 public class AlgoDiffusionEpoque extends AlgoDiffusion {
 
 	@Override
