@@ -29,6 +29,7 @@ public class AlgoDiffusionAtomique extends AlgoDiffusion{
 				incrementer = incrementer && ((Canal) o).isAfficheurUpdated();
 			}
 		}
+		
 		if(incrementer){
 			this.capteur.inc();
 		}

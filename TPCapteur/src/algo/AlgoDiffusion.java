@@ -5,6 +5,11 @@ import java.util.List;
 import models.Capteur;
 import models.Observer;
 
+/**
+ * 
+ * @author qfdk
+ * Algo diffusion
+ */
 public abstract class AlgoDiffusion {
 	
 	protected List<Observer> listCanal;
@@ -13,6 +18,11 @@ public abstract class AlgoDiffusion {
 	protected AlgoDiffusion() {
 	}
 	
+	/**
+	 * Configure an algo
+	 * @param cpt capteur
+	 * @param list list of Canal
+	 */
 	public void configure(Capteur cpt,List<Observer> list) {
 		setCapteur(cpt);
 		setListCanal(list);
@@ -21,6 +31,10 @@ public abstract class AlgoDiffusion {
 	public abstract void execute();
 	
 
+	/**
+	 * get Canal list
+	 * @return list of Canal
+	 */
 	public List<Observer> getListCanal() {
 		return listCanal;
 	}

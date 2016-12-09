@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -11,9 +12,8 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 	private ScheduledExecutorService sch;
 	private Capteur capteur;
 	private Afficheur afficheur;
-	private int id;
 	boolean afficheurUpdated;
-	
+	private int time=3000;
 	/**
 	 * Canal
 	 * @param idCapteur
@@ -32,15 +32,16 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 		this.afficheurUpdated = true;
 	}
 	//creation method invocation
-	public void createUpdate(){
-//		GetValue getValueCallable = new GetValue(this.capteur, this);
-	}
+
+	/*
+	 *  return Future
+	 * */
+	
 	public Future<Integer> createGetValue(){
 		// getValue of capteur -> retourne un futur
 		System.out.println("creation GetValue "+this);
-		GetValue getValueCallable = new GetValue(this.capteur, this);
-		//Future res = this.capteur.getValue(callableGetValue);
-		return sch.schedule(getValueCallable, 840, TimeUnit.MILLISECONDS); //renvoie un future
+		GetValue getValueCallable = new GetValue(this.capteur);
+		return sch.schedule(getValueCallable, new Random().nextInt(this.time), TimeUnit.MILLISECONDS); 
 	}
 	
 	public void schedule(GetValue getValueCallable, int val, TimeUnit timeType){
@@ -61,7 +62,7 @@ public class Canal extends Capteur implements ObserverDeCapteur {
 		this.afficheurUpdated = false;
 		Update methodInvoc = new Update(this, this.afficheur);
 		//submit returns a Future Object
-		return sch.schedule(methodInvoc, 840, TimeUnit.MILLISECONDS); //renvoie un future
+		return sch.schedule(methodInvoc, new Random().nextInt(this.time), TimeUnit.MILLISECONDS); //renvoie un future
 		
 	}
 

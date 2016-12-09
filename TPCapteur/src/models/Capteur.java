@@ -2,14 +2,15 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
-
 import algo.AlgoDiffusion;
 import algo.AlgoDiffusionAtomique;
 import algo.AlgoDiffusionEpoque;
 import algo.AlgoDiffusionSequentielle;
 import views.MaFenetre;
 
+/**
+ * abstract Class Capteur
+ */
 public abstract class Capteur implements Subject {
 
 	protected AlgoDiffusion algo;
@@ -22,18 +23,25 @@ public abstract class Capteur implements Subject {
 		return idCapteur;
 	}
 
-	public void setIdCapteur(int idCapteur) {
-		this.idCapteur = idCapteur;
-	}
 
+	/**
+	 * Constructor Captuer 
+	 * @param id id Capteur
+	 */
 	public Capteur(int id) {
+		this.val = 0;
 		this.idCapteur = id;
 		this.list = new ArrayList<>();
-		val = 0;
 		this.algo = new AlgoDiffusionAtomique();
 		this.algo.configure(this, list);
 	}
 
+	
+	/**
+	 * Constuctor algo
+	 * @param id id capteur
+	 * @param algo Atomique,Seq,Epoque
+	 */
 	public Capteur(int id, String algo) {
 		this.idCapteur = id;
 		this.list = new ArrayList<>();
@@ -74,6 +82,9 @@ public abstract class Capteur implements Subject {
 		return this.val;
 	}
 
+	/**
+	 * Execute an algo
+	 */
 	public void tick() {
 		// algo execute
 		algo.execute();
@@ -81,6 +92,9 @@ public abstract class Capteur implements Subject {
 	}
 
 	// increment cpt
+	/**
+	 * inc the val
+	 */
 	public void inc() {
 		this.val++;
 		try {

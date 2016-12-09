@@ -46,5 +46,4 @@ public class Afficheur implements ObserverDeCapteur {
 		
 	}
 
-
 }

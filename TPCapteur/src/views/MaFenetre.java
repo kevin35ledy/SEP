@@ -3,6 +3,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import models.Afficheur;
 import models.Canal;
@@ -24,31 +26,26 @@ import models.CapteurImpl;
 
 @SuppressWarnings("serial")
 public class MaFenetre extends JFrame implements ActionListener {
-	boolean started=false;
+	boolean started = false;
 
 	private JPanel jp_top;
 	private JPanel jp_afficheur;
-
 	private JPanel jp_centre;
-	
 	private static List<JLabel> listAfficheurs;
-	
 	private JLabel lb_algo;
-	
 	private JComboBox<String> cb_algo;
 	private JLabel lb_tick;
 	private static JLabel lb_capteur;
-	
 	private JButton bp_start;
 	private JButton bp_stop;
 
+	
 	public MaFenetre(String title) {
 		this.setTitle(title);
 		this.setSize(580, 400);
 		init();
 		placement();
 		this.getContentPane().setLayout(new BorderLayout());
-		// todo avec grilayout
 		this.getContentPane().add(jp_top, BorderLayout.NORTH);
 		this.getContentPane().add(jp_centre, BorderLayout.CENTER);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -73,22 +70,24 @@ public class MaFenetre extends JFrame implements ActionListener {
 		jp_afficheur = new JPanel(new GridLayout(2, 2));
 		jp_afficheur.setBorder(BorderFactory.createTitledBorder("Afficheur"));
 		init_afficheur();
-		
-		jp_centre= new JPanel(new GridLayout(1,1));
+
+		jp_centre = new JPanel(new GridLayout(1, 1));
 		jp_centre.add(jp_afficheur);
 
 	}
-	
+
 	private void init_afficheur() {
-		listAfficheurs= new ArrayList<>();
-		
+		listAfficheurs = new ArrayList<>();
+
 		listAfficheurs.add(new JLabel("Afficheur 1"));
 		listAfficheurs.add(new JLabel("Afficheur 2"));
 		listAfficheurs.add(new JLabel("Afficheur 3"));
 		listAfficheurs.add(new JLabel("Afficheur 4"));
 
-		for(int i=0;i<listAfficheurs.size();i++)
-		{
+		for (int i = 0; i < listAfficheurs.size(); i++) {
+			listAfficheurs.get(i).setFont(new Font("Sans Serif", Font.BOLD, 16));
+			listAfficheurs.get(i).setHorizontalAlignment( SwingConstants.CENTER );
+			listAfficheurs.get(i).setAlignmentX(0.5f);
 			jp_afficheur.add(listAfficheurs.get(i));
 		}
 	}
@@ -96,6 +95,7 @@ public class MaFenetre extends JFrame implements ActionListener {
 	private void init_top() {
 		lb_tick = new JLabel("Time : ");
 		lb_capteur = new JLabel("capteur time");
+		lb_capteur.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		bp_start = new JButton("Start");
 		bp_stop = new JButton("Stop");
 		bp_stop.setEnabled(false);
@@ -120,7 +120,7 @@ public class MaFenetre extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == bp_start) {
-			started=true;
+			started = true;
 			System.out.println("[SET-ALGO]" + cb_algo.getSelectedItem());
 			Capteur capteur1 = new CapteurImpl(1, cb_algo.getSelectedItem().toString());
 			// to do
@@ -143,20 +143,19 @@ public class MaFenetre extends JFrame implements ActionListener {
 			canal2.attach(aff2);
 			canal3.attach(aff3);
 			canal4.attach(aff4);
-//			
-			Thread t =new Thread(new Runnable() {
-					public void run() {
-						while(started)
-						{
-							try {
-								Thread.sleep(500);
-								capteur1.tick();
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
+
+			Thread t = new Thread(new Runnable() {
+				public void run() {
+					while (started) {
+						try {
+							Thread.sleep(500);
+							capteur1.tick();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
 					}
-				});
+				}
+			});
 			t.start();
 
 			bp_start.setEnabled(false);
@@ -165,17 +164,16 @@ public class MaFenetre extends JFrame implements ActionListener {
 		if (e.getSource() == bp_stop) {
 			bp_start.setEnabled(true);
 			bp_stop.setEnabled(false);
-			started=false;
+			started = false;
 		}
 	}
 
-	public static void setAfficheurValue(int id,String text)
-	{
-		listAfficheurs.get(id).setText(text);
+	public static void setAfficheurValue(int id, String text) {
+		listAfficheurs.get(id).setText("Value : " + text);
 	}
-	
-	public static void setCapteurValue(int val)
-	{
+
+	public static void setCapteurValue(int val) {
 		lb_capteur.setText(String.valueOf(val));
 	}
+	
 }
