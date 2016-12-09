@@ -1,10 +1,20 @@
 package algo;
 
+import models.Canal;
+import models.Observer;
+
 public class AlgoDiffusionEpoque extends AlgoDiffusion {
 
 	@Override
 	public void execute() {
-		System.out.println("[info] algo epoque");
+		this.capteur.inc();
+		this.capteur.setValDiffused(this.capteur.getRealValue());
+		System.out.println("[info-exe"+listCanal.size()+"] algo par epoque");
+		for(Observer<?> c:listCanal)
+		{
+			((Canal)(c)).updateFuture(capteur);
+		}		
 	}
+
 
 }
