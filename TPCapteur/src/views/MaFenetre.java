@@ -27,12 +27,10 @@ public class MaFenetre extends JFrame implements ActionListener {
 	boolean started=false;
 
 	private JPanel jp_top;
-	private JPanel jp_canal;
 	private JPanel jp_afficheur;
 
 	private JPanel jp_centre;
 	
-	private static List<JLabel> listCanals;
 	private static List<JLabel> listAfficheurs;
 	
 	private JLabel lb_algo;
@@ -71,34 +69,16 @@ public class MaFenetre extends JFrame implements ActionListener {
 		jp_top.setBorder(BorderFactory.createTitledBorder("Top"));
 		init_algo();
 		init_top();
-		
-		jp_canal = new JPanel(new GridLayout(2, 2));
-		jp_canal.setBorder(BorderFactory.createTitledBorder("Canal"));
-		init_canal();
-		
+
 		jp_afficheur = new JPanel(new GridLayout(2, 2));
 		jp_afficheur.setBorder(BorderFactory.createTitledBorder("Afficheur"));
 		init_afficheur();
 		
-		jp_centre= new JPanel(new GridLayout(2,1));
-		jp_centre.add(jp_canal);
+		jp_centre= new JPanel(new GridLayout(1,1));
 		jp_centre.add(jp_afficheur);
 
 	}
-
-	private void init_canal() {
-		this.listCanals=new ArrayList<>();
-		listCanals.add(new JLabel("Canals 1"));
-		listCanals.add(new JLabel("Canals 2"));
-		listCanals.add(new JLabel("Canals 3"));
-		listCanals.add(new JLabel("Canals 4"));
-
-		for(int i=0;i<listCanals.size();i++)
-		{
-			jp_canal.add(listCanals.get(i));
-		}
-	}
-
+	
 	private void init_afficheur() {
 		listAfficheurs= new ArrayList<>();
 		
@@ -192,11 +172,6 @@ public class MaFenetre extends JFrame implements ActionListener {
 	public static void setAfficheurValue(int id,String text)
 	{
 		listAfficheurs.get(id).setText(text);
-	}
-	
-	public static void setCanalValue(int id,String text)
-	{
-		listCanals.get(id).setText(text);
 	}
 	
 	public static void setCapteurValue(int val)

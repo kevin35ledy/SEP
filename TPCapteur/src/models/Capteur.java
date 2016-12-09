@@ -83,6 +83,12 @@ public abstract class Capteur implements Subject {
 	// increment cpt
 	public void inc() {
 		this.val++;
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		MaFenetre.setCapteurValue(this.val);
 	}
 }
