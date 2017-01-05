@@ -14,6 +14,7 @@ import views.MaFenetre;
 public abstract class Capteur implements Subject {
 
 	protected AlgoDiffusion algo;
+	@SuppressWarnings("rawtypes")
 	protected List<Observer> list;
 	protected int val; //vraie valeur du capteur
 	protected int valDiffused = 0; //diffused value of captor
@@ -97,7 +98,6 @@ public abstract class Capteur implements Subject {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		MaFenetre.setCapteurValue(this.val);
