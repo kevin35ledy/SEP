@@ -5,15 +5,32 @@ import java.util.concurrent.Future;
 
 import views.MaFenetre;
 
+/**
+ * Afficheur
+ *
+ */
+/**
+ * @author qfdk
+ *
+ */
 public class Afficheur implements ObserverDeCapteur {
 
 	private Canal canal;
 	private int val;
 
+	/**
+	 * Constructor Afficheur
+	 * @param idCapteur id capteur
+	 */
 	public Afficheur(int idCapteur) {
 		this.canal = new Canal(idCapteur);
 	}
 
+	
+	/**
+	 * Constructor Afficheur
+	 * @param canal Canal
+	 */
 	public Afficheur(Canal canal) {
 		this.canal = canal;
 	}
@@ -39,7 +56,6 @@ public class Afficheur implements ObserverDeCapteur {
 
 	@Override
 	public void update(Capteur subject) {
-		
 	}
 
 }

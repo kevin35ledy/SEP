@@ -23,7 +23,6 @@ public abstract class Capteur implements Subject {
 		return idCapteur;
 	}
 
-
 	/**
 	 * Constructor Captuer 
 	 * @param id id Capteur
@@ -35,7 +34,6 @@ public abstract class Capteur implements Subject {
 		this.algo = new AlgoDiffusionAtomique();
 		this.algo.configure(this, list);
 	}
-
 	
 	/**
 	 * Constuctor algo
@@ -91,7 +89,6 @@ public abstract class Capteur implements Subject {
 		// updates
 	}
 
-	// increment cpt
 	/**
 	 * inc the val
 	 */
